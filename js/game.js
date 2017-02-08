@@ -42,17 +42,12 @@ function redraw()
                   if (wordcheck == CurrentWord.length) 
                   {
                    lose++;
-                   console.log("LOSE POINT SCENARIO TRIGGERED");   
+                   console.log("LOSE POINT SCENARIO TRIGGERED" + lose);   
                    wordcheck = 0;  
                   }
                 }
              }
 
-             if (lose == 6)
-             {
-              document.getElementById("hangarea").innerHTML = '<img src="../assets/imgs/emojihang.gif"'; 
-              console.log("you lost."); 
-             }
 
              for (var i = 0; i < CurrentWord.length; i++)      //draw and check function, tallies the letters to their positions.
              {
@@ -78,6 +73,14 @@ function redraw()
     
 
     }
+
+
+if (lose >= 6)
+             {
+              document.getElementById("hangarea").innerHTML = '<img src="../assets/imgs/emojihang.gif"'; 
+              console.log("you LOST!!!"); 
+             }
+
 }
 
 // victory scenario
@@ -110,6 +113,8 @@ $(document).keyup(event, function()
                 victory();
              }
         });
+
+
 
 while (win < 0)
 {
