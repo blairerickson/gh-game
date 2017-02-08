@@ -8,6 +8,9 @@ $(document).ready(function ()
      var words = ["dog","cat","rock","apple","banana","pond","frog","spider","zebra"];
      var CurrentWord = words[Math.floor(Math.random() * words.length)];
      var chr = 'd';
+     var WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //detects if a letter has been guessed.
+     var win = 0; //checks if victory has been achieved
+     var totalwins = 0; //counts players total wins
 
      document.getElementById("playarea3").innerHTML = 'Your current word is ' + CurrentWord + '<br>';
 
@@ -27,11 +30,16 @@ function redraw()
 
      for (var i = 0; i < CurrentWord.length; i++) 
      {
-
-        if (CurrentWord[i].charAt(0) == chr)
+        if (WordScore[i] == 1)
+            {
+                document.getElementById("playarea2").insertAdjacentHTML('beforeend', CurrentWord.charAt(i));
+                console.log ('skipped a letter. ')
+            }
+        else if (CurrentWord[i].charAt(0) == chr)
             {
                 console.log("HIT " + chr);
-                document.getElementById("playarea2").insertAdjacentHTML('beforeend',  chr );   
+                document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr);
+                WordScore[i] = 1;   
             }
         else 
             {
@@ -41,7 +49,14 @@ function redraw()
  
 }
 
+// victory scenario
 
+function victory()
+                {
+
+                WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //clears WordScore array
+                win = 0;        //resets win checking variable
+                }
 
 // looks for keystrokes and then sets them in lowercase before pasing them to the chr variable.
 
