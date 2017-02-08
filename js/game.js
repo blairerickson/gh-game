@@ -62,6 +62,7 @@ function redraw()
                     {
                         console.log("HIT " + chr);
                         LetterCount++;
+                        wordcheck = 0;  
                         console.log(LetterCount);
                         document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr);
                         WordScore[i] = 1;   
