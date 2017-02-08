@@ -11,7 +11,7 @@ $(document).ready(function ()
      var chr = 'd';
      var WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //detects if a letter has been guessed.
      var win = 0; //checks if victory has been achieved
-     var lose = 0; //checks if user has run out of turns
+     var lose = 1; //checks if user has run out of turns
      var totalwins = 0; //counts players total wins
      var LetterCount = 0; //tallies letters guessed
      var hangcount = 0; //totals up points towards losing scenario
@@ -45,6 +45,7 @@ function redraw()
                    lose++;
                    console.log("LOSE POINT SCENARIO TRIGGERED" + lose);   
                    wordcheck = 0;  
+                   document.getElementById("hangarea").innerHTML ='<img src="assets/imgs/frame' + lose +'.jpg" width=40%>';
                   }
                 }
              }
