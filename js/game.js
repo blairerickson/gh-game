@@ -40,7 +40,7 @@ function redraw()
                 if (CurrentWord[i].charAt(0) != chr)
                 {
                   wordcheck++;
-                  if (wordcheck == CurrentWord.length) 
+                  if (wordcheck == CurrentWord.length & lose < 6) 
                   {
                    lose++;
                    console.log("LOSE POINT SCENARIO TRIGGERED" + lose);   
@@ -73,7 +73,10 @@ function redraw()
                      }
              }
 
-    
+    if (totalwins > 0) 
+    {
+          document.getElementById("playarea3").innerHTML = "<p><br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
+    } 
 
     }
 
@@ -81,6 +84,7 @@ function redraw()
 if (lose >= 6)
              {
               document.getElementById("hangarea").innerHTML = '<img src="assets/imgs/emojihang.gif" width=40% >'; 
+              document.getElementById("playarea2").innerHTML = 'GAME OVER!'; 
               console.log("you LOST!!!"); 
              }
 
@@ -122,7 +126,7 @@ $(document).keyup(event, function()
 
 
 
-//restart game
+//next level
 function newword()
 {
      console.log ("NEW WORD!");
@@ -130,6 +134,8 @@ function newword()
      LetterCount = 0;
      hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
      document.getElementById("playarea2").innerHTML = " ";  
+     document.getElementById("playarea3").innerHTML = "<p><br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
+
 
             for (var i = 0; i < CurrentWord.length; i++)      //draw and check function, tallies the letters to their positions.
              {
@@ -137,6 +143,23 @@ function newword()
              }
 }
 
+
+function restart()
+{
+     console.log ("NEW GAME STARTED!");
+     CurrentWord = words[Math.floor(Math.random() * words.length)];
+     LetterCount = 0;
+     totalwins = 0;
+     hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
+     document.getElementById("playarea2").innerHTML = " ";  
+     document.getElementById("playarea3").innerHTML = "<p><br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
+
+
+            for (var i = 0; i < CurrentWord.length; i++)      //draw and check function, tallies the letters to their positions.
+             {
+             document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ ");   
+             }
+}
 
 while (win < 0)
 {
