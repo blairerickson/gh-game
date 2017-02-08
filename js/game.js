@@ -60,9 +60,13 @@ function redraw()
 
 function victory()
                 {
-
+                console.log('victorious scenario run');
+                CurrentWord = words[Math.floor(Math.random() * words.length)];
+                totalwins++;
+                 document.getElementById("playarea3").innerHTML = "<p>YOU WON! Current wins: </p> " + totalwins;
+                LetterCount = 0;
                 WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //clears WordScore array
-                win = 0;        //resets win checking variable
+                win = 0;      //resets win checking variable  
                 }
 
 // looks for keystrokes and then sets them in lowercase before pasing them to the chr variable.
@@ -78,9 +82,14 @@ $(document).keyup(event, function()
              {
                 win = 1;
                 console.log("U   W O N!!")
-                     document.getElementById("playarea3").innerHTML = "<p>YOU WON!</p> ";
+                victory();
              }
         });
+
+while (win < 0)
+{
+    victory();
+}
 
 
 })
