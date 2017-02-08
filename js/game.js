@@ -3,7 +3,8 @@ $(document).ready(function ()
 
     
    
-     hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=30% >';  
+     hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
+
 
      var words = ["dog","cat","rock","apple","banana","pond","frog","spider","zebra"];
      var CurrentWord = words[Math.floor(Math.random() * words.length)];
@@ -77,7 +78,7 @@ function redraw()
 
 if (lose >= 6)
              {
-              document.getElementById("hangarea").innerHTML = '<img src="../assets/imgs/emojihang.gif"'; 
+              document.getElementById("hangarea").innerHTML = '<img src="assets/imgs/emojihang.gif" width=40% >'; 
               console.log("you LOST!!!"); 
              }
 
