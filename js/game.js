@@ -3,15 +3,18 @@ $(document).ready(function ()
 
     
    
-      hangarea.innerHTML = '<img src="http://tinyurl.com/j7vdmn4" width=30% >';  
+     hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=30% >';  
 
      var words = ["dog","cat","rock","apple","banana","pond","frog","spider","zebra"];
      var CurrentWord = words[Math.floor(Math.random() * words.length)];
      var chr = 'd';
      var WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //detects if a letter has been guessed.
      var win = 0; //checks if victory has been achieved
+     var lose = 0; //checks if user has run out of turns
      var totalwins = 0; //counts players total wins
      var LetterCount = 0; //tallies letters guessed
+     var hangcount = 0; //totals up points towards losing scenario
+     var wordcheck = 0; //checks the word for no match
 
      document.getElementById("playarea3").innerHTML = 'Your current word is ' + CurrentWord + '<br>';
 
@@ -26,12 +29,32 @@ $(document).ready(function ()
 
 function redraw()
 {
-    if (win != 1)
+    if (win == 0)
     {
-     document.getElementById("playarea2").innerHTML = " ";
+     document.getElementById("playarea2").innerHTML = " ";  
      console.log("emptied" + chr);
 
              for (var i = 0; i < CurrentWord.length; i++) 
+             {
+                if (CurrentWord[i].charAt(0) != chr)
+                {
+                  wordcheck++;
+                  if (wordcheck == CurrentWord.length) 
+                  {
+                   lose++;
+                   console.log("LOSE POINT SCENARIO TRIGGERED");   
+                   wordcheck = 0;  
+                  }
+                }
+             }
+
+             if (lose == 6)
+             {
+              document.getElementById("hangarea").innerHTML = '<img src="../assets/imgs/emojihang.gif"'; 
+              console.log("you lost."); 
+             }
+
+             for (var i = 0; i < CurrentWord.length; i++)      //draw and check function, tallies the letters to their positions.
              {
                 if (WordScore[i] == 1)
                     {
@@ -51,6 +74,8 @@ function redraw()
                     document.getElementById("playarea2").insertAdjacentHTML('beforeend', "  ___  ");   
                      }
              }
+
+    
 
     }
 }
