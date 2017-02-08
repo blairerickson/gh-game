@@ -22,7 +22,7 @@ $(document).ready(function ()
 
 // first draw
      for (var i = 0; i < CurrentWord.length; i++) {
-       document.getElementById("playarea2").insertAdjacentHTML('beforeend', "  ___  ");   
+       document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ ");   
      }
 
 
@@ -58,7 +58,7 @@ function redraw()
                         document.getElementById("playarea2").insertAdjacentHTML('beforeend', CurrentWord.charAt(i));
                         console.log ('skipped a letter. ')
                     }
-                else if (CurrentWord[i].charAt(0) == chr)
+                else if (CurrentWord[i].charAt(0) == chr)    //adds letters to board
                     {
                         console.log("HIT " + chr);
                         LetterCount++;
@@ -69,7 +69,7 @@ function redraw()
                     }
                 else 
                     {
-                    document.getElementById("playarea2").insertAdjacentHTML('beforeend', "  ___  ");   
+                    document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ ");   
                      }
              }
 
@@ -94,7 +94,7 @@ function victory()
                 console.log('victorious scenario run');
                 CurrentWord = words[Math.floor(Math.random() * words.length)];
                 totalwins++;
-                 document.getElementById("playarea3").innerHTML = "<p>YOU WON! Current wins: </p> " + totalwins;
+                 document.getElementById("playarea3").innerHTML = "<p>YOU WON! <br>Current wins: <br></p> " + totalwins;
                 LetterCount = 0;
                 WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //clears WordScore array
                 win = 0;      //resets win checking variable  
