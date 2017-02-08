@@ -11,6 +11,7 @@ $(document).ready(function ()
      var WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //detects if a letter has been guessed.
      var win = 0; //checks if victory has been achieved
      var totalwins = 0; //counts players total wins
+     var LetterCount = 0; //tallies letters guessed
 
      document.getElementById("playarea3").innerHTML = 'Your current word is ' + CurrentWord + '<br>';
 
@@ -25,31 +26,37 @@ $(document).ready(function ()
 
 function redraw()
 {
+    if (win != 1)
+    {
      document.getElementById("playarea2").innerHTML = " ";
      console.log("emptied" + chr);
 
-     for (var i = 0; i < CurrentWord.length; i++) 
-     {
-        if (WordScore[i] == 1)
-            {
-                document.getElementById("playarea2").insertAdjacentHTML('beforeend', CurrentWord.charAt(i));
-                console.log ('skipped a letter. ')
-            }
-        else if (CurrentWord[i].charAt(0) == chr)
-            {
-                console.log("HIT " + chr);
-                document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr);
-                WordScore[i] = 1;   
-            }
-        else 
-            {
-            document.getElementById("playarea2").insertAdjacentHTML('beforeend', "  ___  ");   
+             for (var i = 0; i < CurrentWord.length; i++) 
+             {
+                if (WordScore[i] == 1)
+                    {
+                        document.getElementById("playarea2").insertAdjacentHTML('beforeend', CurrentWord.charAt(i));
+                        console.log ('skipped a letter. ')
+                    }
+                else if (CurrentWord[i].charAt(0) == chr)
+                    {
+                        console.log("HIT " + chr);
+                        LetterCount++;
+                        console.log(LetterCount);
+                        document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr);
+                        WordScore[i] = 1;   
+                    }
+                else 
+                    {
+                    document.getElementById("playarea2").insertAdjacentHTML('beforeend', "  ___  ");   
+                     }
              }
-     }
- 
+
+    }
 }
 
 // victory scenario
+
 
 function victory()
                 {
@@ -65,7 +72,14 @@ $(document).keyup(event, function()
       chr = String.fromCharCode(event.keyCode);//converts the keycode into a character
         chr = chr.toLowerCase();
         redraw();
-        console.log("redrawn..." + chr)
+        console.log("redrawn..." + chr);
+
+ if (CurrentWord.length == LetterCount)
+             {
+                win = 1;
+                console.log("U   W O N!!")
+                     document.getElementById("playarea3").innerHTML = "<p>YOU WON!</p> ";
+             }
         });
 
 
