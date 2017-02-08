@@ -94,10 +94,13 @@ function victory()
                 console.log('victorious scenario run');
                 CurrentWord = words[Math.floor(Math.random() * words.length)];
                 totalwins++;
-                 document.getElementById("playarea3").innerHTML = "<p>YOU WON! <br>Current wins: <br></p> " + totalwins;
+                 document.getElementById("playarea3").innerHTML = "<p>YOU WON! <br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
                 LetterCount = 0;
+                hangcount = 0;
+                lose = 1;
                 WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //clears WordScore array
                 win = 0;      //resets win checking variable  
+                document.getElementById("nextword").addEventListener("click", newword);
                 }
 
 // looks for keystrokes and then sets them in lowercase before pasing them to the chr variable.
@@ -117,6 +120,22 @@ $(document).keyup(event, function()
              }
         });
 
+
+
+//restart game
+function newword()
+{
+     console.log ("NEW WORD!");
+     CurrentWord = words[Math.floor(Math.random() * words.length)];
+     LetterCount = 0;
+     hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
+     document.getElementById("playarea2").innerHTML = " ";  
+
+            for (var i = 0; i < CurrentWord.length; i++)      //draw and check function, tallies the letters to their positions.
+             {
+             document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ ");   
+             }
+}
 
 
 while (win < 0)
