@@ -6,8 +6,10 @@ $(document).ready(function ()
      hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
 
 
-     var words = ["dog","cat","rock","apple","banana","pond","frog","spider","zebra"];
-     var CurrentWord = words[Math.floor(Math.random() * words.length)];
+     var words = ["facebook","app","twitter","email","wikipedia","android","iphone","google","apple","emoji","windows","text","reddit","instagram","snapchat"];
+     var hints = ["most popular social media platform","mobile software","short message platform","classic internet communication","massive collection of knowledge","widespread mobile OS","profitable mobile device","search engine","fruit company","text faces","classic desktop OS","send message","front page of the internet","photosharing","vanishing images"];
+     var wordindex = Math.floor(Math.random() * words.length);
+     var CurrentWord = 0;
      var chr = 'a';
      var WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //detects if a letter has been guessed.
      var win = 0; //checks if victory has been achieved
@@ -17,7 +19,8 @@ $(document).ready(function ()
      var hangcount = 0; //totals up points towards losing scenario
      var wordcheck = 0; //checks the word for no match
 
-     document.getElementById("playarea3").innerHTML = 'Your current word is ' + CurrentWord + '<br>';
+     CurrentWord = words[wordindex];
+     document.getElementById("playarea3").innerHTML = 'Your current word hint is ' + hints[wordindex] + '<br>';
 
 
 // first draw
@@ -26,7 +29,7 @@ $(document).ready(function ()
      }
 
 
-//redraw function that places the letters in case of a hit.
+//redraw screen function that places the letters in case of a hit.
 
 function redraw()
 {
@@ -73,9 +76,11 @@ function redraw()
                      }
              }
 
-    if (totalwins > 0) 
+    if (lose > 3) 
     {
-          document.getElementById("playarea3").innerHTML = "<p><br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
+     document.getElementById("playarea3").innerHTML = 'Your current word hint is ' + hints[wordindex] + '<br>';
+     console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
+          console.log ("Word:" + CurrentWord + "wordindex:" + wordindex);
     } 
 
     }
@@ -90,6 +95,8 @@ if (lose >= 6)
               console.log("you LOST!!!"); 
              }
 
+     console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
+
 }
 
 // victory scenario
@@ -98,7 +105,7 @@ if (lose >= 6)
 function victory()
                 {
                 console.log('victorious scenario run');
-                CurrentWord = words[Math.floor(Math.random() * words.length)];
+                console.log ("Word:" + CurrentWord + "wordindex:" + wordindex);
                 totalwins++;
                 document.getElementById("playarea3").innerHTML = "<p>YOU WON! <br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
                 LetterCount = 0;
@@ -132,7 +139,9 @@ $(document).keyup(event, function()
 function newword()
 {
      console.log ("NEW WORD!");
-     CurrentWord = words[Math.floor(Math.random() * words.length)];
+     var wordindex = Math.floor(Math.random() * words.length);
+     CurrentWord = words[wordindex];
+     console.log ("Word:" + CurrentWord + "wordindex:" + wordindex);
      LetterCount = 0;
      hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
      document.getElementById("playarea2").innerHTML = " ";  
@@ -143,6 +152,9 @@ function newword()
              {
              document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ ");   
              }
+
+    console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
+
 }
 
 
@@ -150,12 +162,16 @@ function restart()
 {
      console.log ("NEW GAME STARTED!");
      document.getElementById("playarea2").innerHTML = " ";  
-     CurrentWord = words[Math.floor(Math.random() * words.length)];
+     var wordindex = Math.floor(Math.random() * words.length);
+     CurrentWord = words[wordindex];
+     console.log ("Restarted Word:" + CurrentWord + "wordindex:" + wordindex);
+
          for (var i = 0; i < CurrentWord.length; i++)      //draw the blanks to their positions.
              {
              document.getElementById("playarea2").insertAdjacentHTML('afterbegin', " _ "); 
              console.log("blank.");  
              }
+
      LetterCount = 0;
      totalwins = 0;
      hangcount = 0;
@@ -165,7 +181,9 @@ function restart()
      WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
      hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
      document.getElementById("playarea3").innerHTML = "<p><br>Current wins: <br></p> " + totalwins;
-     console.log(CurrentWord);
+
+     console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
+
 
 
 }
