@@ -81,7 +81,6 @@ function redraw()
                         console.log(LetterCount);
 
                         document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr.toUpperCase());
-                        document.getElementById("playarea3").innerHTML = "";
                         WordScore[i] = 1;   
                     }
                 else 
