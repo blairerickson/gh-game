@@ -33,20 +33,25 @@ $(document).ready(function ()
 
 function redraw()
 {
+    wordindex = words.indexOf(CurrentWord);
+
     if (win == 0)
     {
      document.getElementById("playarea2").innerHTML = " ";  
      console.log("emptied" + chr);
+
 
              for (var i = 0; i < CurrentWord.length; i++) 
              {
                 if (CurrentWord[i].charAt(0) != chr)
                 {
                   wordcheck++;
+
                   if (wordcheck == CurrentWord.length & lose < 6) 
                   {
                    lose++;
                    console.log("LOSE POINT SCENARIO TRIGGERED" + lose);   
+
                    wordcheck = 0;  
                    document.getElementById("hangarea").innerHTML ='<img src="assets/imgs/frame' + lose +'.jpg" width=40%>';
                   }
@@ -60,6 +65,7 @@ function redraw()
                     {
                         document.getElementById("playarea2").insertAdjacentHTML('beforeend', CurrentWord.charAt(i));
                         console.log ('skipped a letter. ')
+
                     }
                 else if (CurrentWord[i].charAt(0) == chr)    //adds letters to board
                     {
@@ -67,20 +73,20 @@ function redraw()
                         LetterCount++;
                         wordcheck = 0;  
                         console.log(LetterCount);
+
                         document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr);
                         WordScore[i] = 1;   
                     }
                 else 
                     {
-                    document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ ");   
+                    document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ "); 
+  
                      }
              }
 
     if (lose > 3) 
     {
      document.getElementById("playarea3").innerHTML = 'Your current word hint is ' + hints[wordindex] + '<br>';
-     console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
-          console.log ("Word:" + CurrentWord + "wordindex:" + wordindex);
     } 
 
     }
@@ -105,7 +111,6 @@ if (lose >= 6)
 function victory()
                 {
                 console.log('victorious scenario run');
-                console.log ("Word:" + CurrentWord + "wordindex:" + wordindex);
                 totalwins++;
                 document.getElementById("playarea3").innerHTML = "<p>YOU WON! <br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
                 LetterCount = 0;
@@ -153,7 +158,6 @@ function newword()
              document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ ");   
              }
 
-    console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
 
 }
 
@@ -182,11 +186,8 @@ function restart()
      hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
      document.getElementById("playarea3").innerHTML = "<p><br>Current wins: <br></p> " + totalwins;
 
-     console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
-
-
-
 }
+
 
 while (win < 0)
 {
