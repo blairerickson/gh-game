@@ -84,7 +84,7 @@ function redraw()
                      }
              }
 
-    if (lose > 3) 
+    if (lose > 4) 
     {
      document.getElementById("playarea3").innerHTML = 'Your current word hint is ' + hints[wordindex] + '<br>';
     } 
