@@ -18,6 +18,7 @@ $(document).ready(function ()
      var LetterCount = 0; //tallies letters guessed
      var hangcount = 0; //totals up points towards losing scenario
      var wordcheck = 0; //checks the word for no match
+     var disablehints = 0;
 
      CurrentWord = words[wordindex];
      document.getElementById("playarea3").innerHTML = 'HINT: ' + hints[wordindex] + '<br>';
@@ -54,13 +55,7 @@ function redraw()
                    console.log("LOSE POINT SCENARIO TRIGGERED" + lose);   
                    document.getElementById("playarea3").innerHTML ='<p><font color="red"> letter ' + chr.toUpperCase() + ' not found! </font></p>';
 
-                   if (lose > 3 & lose <6)  //gives hints if player is losing
-                        {
-                         setTimeout(function()
-                            { 
-                            document.getElementById("playarea3").innerHTML = 'HINT: ' + hints[wordindex] + '<br>';
-                            }, 1000);
-                        } 
+                  hinter();
                    
                    wordcheck = 0;  
 
@@ -92,7 +87,7 @@ function redraw()
                 else 
                     {
                     document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ "); 
-  
+                  
                      }
 
 
@@ -104,12 +99,18 @@ function redraw()
 
 
 
-// responds to hint timer
-//function hinter()
-//{
- //    document.getElementById("playarea3").innerHTML = 'HINT: ' + hints[wordindex] + '<br>';
- //    console.log("hinter run");
- //}
+        function hinter()
+            {
+                      if (lose > 3 & lose <6 & disablehints == 0)  //gives hints if player is losing
+                        {
+                         setTimeout(function()
+                            { 
+                            document.getElementById("playarea3").innerHTML = 'HINT: ' + hints[wordindex] + '<br>';
+                            }, 1000);
+                         console.log("hinter run");
+                        } 
+            }
+
 
 if (lose >= 6)
              {
@@ -118,7 +119,7 @@ if (lose >= 6)
               document.getElementById("playarea3").innerHTML = '<br><br> <button type="button" class="btn btn-secondary" id="restartbutton">RESTART</button>';
               document.getElementById("restartbutton").addEventListener("click", restart);
               console.log("you LOST!!!"); 
-        
+            disablehints = 1;
              }
 
      console.log("wordindex: " + wordindex + "    Current word is: " + CurrentWord + "hint: " + hints[wordindex]);
@@ -138,6 +139,7 @@ function victory()
                 lose = 1;
                 WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //clears WordScore array
                 document.getElementById("nextword").addEventListener("click", newword);
+                disablehints = 1;
                 }
 
 // looks for keystrokes and then sets them in lowercase before pasing them to the chr variable.
@@ -168,6 +170,7 @@ function newword()
      console.log ("Word:" + CurrentWord + "wordindex:" + wordindex);
      LetterCount = 0;
      win = 0;
+     disablehints = 0;
      hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
      document.getElementById("playarea2").innerHTML = " ";  
      document.getElementById("playarea3").innerHTML = "<p><br>Current wins: <br></p> " + totalwins + '<br><br> <button type="button" class="btn btn-secondary" id="nextword">NEXT WORD</button>';
@@ -201,6 +204,7 @@ function restart()
      hangcount = 0;
      wordcheck = 0;
      win = 0;
+     disablehints = 0;
      lose = 1;
      WordScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
      hangarea.innerHTML = '<img src="assets/imgs/frame1.jpg" width=40% >';  
