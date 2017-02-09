@@ -20,7 +20,7 @@ $(document).ready(function ()
      var wordcheck = 0; //checks the word for no match
 
      CurrentWord = words[wordindex];
-     document.getElementById("playarea3").innerHTML = 'Your current word hint is ' + hints[wordindex] + '<br>';
+     document.getElementById("playarea3").innerHTML = 'HINT: ' + hints[wordindex] + '<br>';
 
 
 // first draw
@@ -40,6 +40,10 @@ function redraw()
      document.getElementById("playarea2").innerHTML = " ";  
      console.log("emptied" + chr);
 
+                 if (lose > 3) 
+                        {
+                         document.getElementById("playarea3").innerHTML = 'HINT: ' + hints[wordindex] + '<br>';
+                        } 
 
              for (var i = 0; i < CurrentWord.length; i++) 
              {
@@ -51,6 +55,7 @@ function redraw()
                   {
                    lose++;
                    console.log("LOSE POINT SCENARIO TRIGGERED" + lose);   
+                   document.getElementById("playarea3").innerHTML ='<p><font color="red"> letter ' + chr.toUpperCase() + ' not found! </font></p>';
 
                    wordcheck = 0;  
                    document.getElementById("hangarea").innerHTML ='<img src="assets/imgs/frame' + lose +'.jpg" width=40%>';
@@ -63,7 +68,7 @@ function redraw()
              {
                 if (WordScore[i] == 1)
                     {
-                        document.getElementById("playarea2").insertAdjacentHTML('beforeend', CurrentWord.charAt(i));
+                        document.getElementById("playarea2").insertAdjacentHTML('beforeend', CurrentWord.charAt(i).toUpperCase());
                         console.log ('skipped a letter. ')
 
                     }
@@ -74,7 +79,7 @@ function redraw()
                         wordcheck = 0;  
                         console.log(LetterCount);
 
-                        document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr);
+                        document.getElementById("playarea2").insertAdjacentHTML('beforeend', chr.toUpperCase());
                         WordScore[i] = 1;   
                     }
                 else 
@@ -82,12 +87,11 @@ function redraw()
                     document.getElementById("playarea2").insertAdjacentHTML('beforeend', " _ "); 
   
                      }
+
+
              }
 
-    if (lose > 4) 
-    {
-     document.getElementById("playarea3").innerHTML = 'Your current word hint is ' + hints[wordindex] + '<br>';
-    } 
+
 
     }
 
