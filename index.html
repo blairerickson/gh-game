@@ -54,10 +54,34 @@
 
     </div>
 
+    <prompt
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/game.js"></script>
+    <script type="text/javascript">
+      // mobile pop keyboard open
+
+window.addEventListener('DOMContentLoaded', function() {
+      var button = document.querySelector('#button');
+      var input = document.querySelector('#input');
+      console.log("iOS keyboard function run");
+      var focus = function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var clone = input.cloneNode(true);
+        var parent = input.parentElement;
+        parent.appendChild(clone);
+        parent.replaceChild(clone, input);
+        input = clone;
+        window.setTimeout(function() {
+          input.value = input.value || "";
+          input.focus();
+        }, 0);
+      }
+    }, false);
+    </script>
   </body>
 </html>
