@@ -195,7 +195,20 @@ while (win < 0)
 }
 
 
+preloadImage("assets/imgs/frame1.jpg");
+preloadImage("assets/imgs/frame2.jpg");
+preloadImage("assets/imgs/frame3.jpg");
+preloadImage("assets/imgs/frame4.jpg");
+preloadImage("assets/imgs/frame5.jpg");
+preloadImage("assets/imgs/frame6.jpg");
+preloadImage("assets/imgs/emojihang.gif");
 
+function preloadImage(url)
+{
+    var img=new Image();
+    img.src=url;
+    console.log("preloaded.... " + url);
+}
 
 
 
